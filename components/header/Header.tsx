@@ -2,14 +2,13 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Lightbulb, Loader2Icon } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
-import { User } from "@/types/User";
+import { auth } from "@/auth";
 
 
-interface HeaderProps {
-  user: User;
-}
+export const Header = async () => {
+  const session = await auth();
 
-export const Header: React.FC<HeaderProps> = ({ user = {} }) => {
+  const user = session?.user;
 
   return (
     <nav className="border-b p-4">
@@ -37,9 +36,11 @@ export const Header: React.FC<HeaderProps> = ({ user = {} }) => {
               </div>
             }
           >
-            <button className="flex items-center gap-2">
-              <Link href="/sign-in">Sign In</Link>
-            </button>
+            {!user && (
+              <button className="flex items-center gap-2">
+                <Link href="/api/auth/signin">Sign In</Link>
+              </button>
+            )}
           </Suspense>
         </div>
       </div>
