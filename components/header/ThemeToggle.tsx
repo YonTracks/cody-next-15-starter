@@ -14,7 +14,7 @@ export function ThemeToggle() {
     }, []);
 
     // Avoid rendering icons on the server to prevent hydration errors
-    if (!mounted) return <div className="h-8 w-8 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>;
+    if (!mounted) return <div className="h-9 w-9 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>;
 
     return (
         <button

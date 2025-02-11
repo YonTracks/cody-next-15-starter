@@ -2,10 +2,15 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Lightbulb, Loader2Icon } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { User } from "@/types/User";
 
-let user;
 
-export async function Header() {
+interface HeaderProps {
+  user: User;
+}
+
+export const Header: React.FC<HeaderProps> = ({ user = {} }) => {
+
   return (
     <nav className="border-b p-4">
       <div className="container mx-auto flex items-center justify-between">
@@ -16,7 +21,7 @@ export async function Header() {
           </Link>
 
           {user && (
-            <button className="flex items-center gap-2">
+            <button className="flex text-white items-center gap-2">
               <Link href="/dashboard">Dashboard</Link>
             </button>
           )}
@@ -32,7 +37,9 @@ export async function Header() {
               </div>
             }
           >
-            <NavActions />
+            <button className="flex items-center gap-2">
+              <Link href="/sign-in">Sign In</Link>
+            </button>
           </Suspense>
         </div>
       </div>
@@ -40,21 +47,3 @@ export async function Header() {
   );
 }
 
-async function NavActions() {
-  return user ? (
-    <>
-      <div className="hidden md:block">
-        {/* UserDropdown (if needed) */}
-      </div>
-      <div className="md:hidden">
-        {/* Mobile Menu Button (if needed) */}
-      </div>
-    </>
-  ) : (
-    <>
-      <button className="flex items-center gap-2">
-        <Link href="/sign-in">Sign In</Link>
-      </button>
-    </>
-  );
-}

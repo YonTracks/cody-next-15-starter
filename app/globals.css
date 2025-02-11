@@ -4,17 +4,12 @@
 
 /* Light mode (default) */
 body {
-  @apply bg-white text-black transition-colors duration-300;
+  @apply text-black;
 }
 
 /* Dark mode */
 .dark body {
   @apply bg-gray-900 text-white;
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
