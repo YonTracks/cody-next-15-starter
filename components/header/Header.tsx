@@ -1,13 +1,11 @@
-
 import Link from "next/link";
 import { Suspense } from "react";
 import { Lightbulb, Loader2Icon } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 let user;
 
 export async function Header() {
-
-
   return (
     <nav className="border-b p-4">
       <div className="container mx-auto flex items-center justify-between">
@@ -19,14 +17,14 @@ export async function Header() {
 
           {user && (
             <button className="flex items-center gap-2">
-              <Link href="/dashboard">
-                Dashboard
-              </Link>
+              <Link href="/dashboard">Dashboard</Link>
             </button>
           )}
         </div>
 
         <div className="flex items-center gap-5">
+          <ThemeToggle />
+
           <Suspense
             fallback={
               <div className="flex w-40 items-center justify-center">
@@ -43,24 +41,20 @@ export async function Header() {
 }
 
 async function NavActions() {
-
   return user ? (
     <>
       <div className="hidden md:block">
-        {/* <ModeToggle /> */}
+        {/* UserDropdown (if needed) */}
       </div>
-      {/* <UserDropdown /> */}
       <div className="md:hidden">
-        {/* <MenuButton /> */}
+        {/* Mobile Menu Button (if needed) */}
       </div>
     </>
   ) : (
     <>
-      {/* <ModeToggle /> */}
       <button className="flex items-center gap-2">
         <Link href="/sign-in">Sign In</Link>
       </button>
     </>
   );
 }
-
