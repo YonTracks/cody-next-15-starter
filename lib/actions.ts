@@ -72,6 +72,58 @@ export async function registerUser(formData: FormData) {
   }
 }
 
+// Define a schema for resetting the password.
+// It expects an email, a new password, and a confirmation (which must match).
+const ResetPasswordSchema = z
+  .object({
+    email: z.string().email({ message: "Invalid email address" }),
+    newPassword: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long" }),
+    confirmPassword: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long" }),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
+
+export async function resetPassword(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    // Validate the form data
+    const validated = ResetPasswordSchema.safeParse({
+      email: formData.get("email"),
+      newPassword: formData.get("newPassword"),
+      confirmPassword: formData.get("confirmPassword"),
+    });
+
+    const { email, newPassword } = validated.data;
+    // Check that the user exists
+    const { rows } = await sql`SELECT * FROM users WHERE email = ${email}`;
+    if (!rows.length) {
+      throw new Error("User not found");
+    }
+
+    // Hash the new password and update the user's record
+    const hashedPassword = await hash(newPassword, 12);
+    console.log("Reset password action triggered:", formData.get("email"));
+    await sql`
+      UPDATE users
+      SET password = ${hashedPassword}
+      WHERE email = ${email}
+    `;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.log("Error occurred resetting password:  ", error);
+  }
+  return "Password reset successfully!";
+}
+
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData
@@ -80,26 +132,19 @@ export async function authenticate(
     await signIn("credentials", formData, {
       redirectTo: "/home",
     });
-  } catch (error) {
-    if (error instanceof AuthError) {
-      console.log("Error occurred during authentication: ");
-      switch (error) {
-        case "CredentialsSignin":
-          return "Invalid credentials.";
-        case "CallbackRouteError":
-          return "CallbackRouteError";
-        case "User not found":
-          return "User not found";
-        case "Invalid password":
-          return "Invalid password";
-        default:
-          return "Something went wrong.";
-      }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    // console.log("Error occurred during authentication: ", error?.cause?.err);
+    switch (error.type) {
+      case "CredentialsSignin":
+        return error.cause.err.message;
+      case "CallbackRouteError":
+        return error.cause.err.message;
+      case "User not found":
+        return error.cause.err.message;
+      default:
+        redirect("/login");
     }
-    redirect("/login");
-    // ToDo throw error message to user
-
-    // throw error;
   }
 }
 

@@ -81,7 +81,7 @@ export default function LoginForm() {
                 <ExclamationCircleIcon className="size-5 text-red-500" />
                 <p className="text-sm text-red-500">{errorMessage}</p>
                 {errorMessage === "User not found" && (
-                  <Link href={"/signup"} className='ml-auto text-sm hover:text-blue-500 '>signup</Link>
+                  <Link href={"/register"} className='ml-auto text-sm hover:text-blue-500 '>signup</Link>
                 )}
                 {errorMessage === "Invalid password" && (
                   <Link href={"/resetPassword"} className='ml-auto text-sm hover:text-blue-500 '>Reset password</Link>
