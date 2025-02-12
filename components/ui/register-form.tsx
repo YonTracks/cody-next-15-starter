@@ -9,7 +9,7 @@ import {
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { registerUser } from '@/lib/actions';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button2 } from '@/components/ui/button2';
 
 export default function RegisterForm() {
     const [password, setPassword] = useState('');
@@ -97,9 +97,9 @@ export default function RegisterForm() {
                         </div>
                     )}
                 </div>
-                <Button className="mt-4 w-full">
+                <Button2 className="mt-4 w-full">
                     Signup <ArrowRightIcon className="ml-auto size-5 text-gray-50" />
-                </Button>
+                </Button2>
                 <div className="flex w-full h-10 items-center rounded-lg p-4 text-sm font-medium">
                     <p className="text-sm">Already have an account?</p>
                     <Link href="/login" className="ml-auto text-sm text-blue-600 hover:text-blue-500">

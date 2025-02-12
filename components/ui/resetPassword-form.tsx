@@ -7,7 +7,7 @@ import {
     KeyIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from '@/components/ui/button';
+import { Button2 } from '@/components/ui/button2';
 import { useActionState } from 'react';
 import { resetPassword } from '@/lib/actions';
 import Link from 'next/link';
@@ -85,9 +85,9 @@ export default function ResetPasswordForm() {
                         </div>
                     </div>
                 </div>
-                <Button className="mt-4 w-full" aria-disabled={isPending}>
+                <Button2 className="mt-4 w-full" aria-disabled={isPending}>
                     Reset Password <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-                </Button>
+                </Button2>
                 {errorMessage && (
                     <div
                         className="flex h-10 items-end space-x-1"

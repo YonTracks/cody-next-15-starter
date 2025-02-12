@@ -9,7 +9,7 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Button } from '@/components/ui/button';
+import { Button2 } from '@/components/ui/button2';
 import { useActionState } from 'react';
 
 import { authenticate } from '@/lib/actions';
@@ -67,9 +67,9 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <Button className="mt-4 w-full" aria-disabled={isPending}>
+        <Button2 className="mt-4 w-full" aria-disabled={isPending}>
           Log in <ArrowRightIcon className="ml-auto size-5 text-gray-50" />
-        </Button>
+        </Button2>
         <div
           className="flex h-10 items-end space-x-1"
           aria-live="polite"
