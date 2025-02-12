@@ -35,6 +35,8 @@ export type Customer = {
   name: string;
   email: string;
   image_url: string;
+  total_pending: number;
+  total_paid: number;
 };
 
 export type Invoice = {
