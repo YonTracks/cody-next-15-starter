@@ -36,7 +36,7 @@ export default function RootLayout({
         className={(
           `min-h-screen bg-background antialiased,
     ${archivo.variable + " " + libre_franklin.variable},
-  `)}
+  no-select overflow-auto `)}
       >
         <Providers>
 

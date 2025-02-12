@@ -1,12 +1,23 @@
+// app/dashboard/(overview)/customers/page.tsx
 
+import Table from "@/components/ui/customers/table";
+import { fetchFilteredCustomers } from "@/lib/data";
+import { SearchParams } from "@/types";
 
-export default async function CustomersPage() {
+export default async function Page({
+    searchParams,
+}: {
+    searchParams: Promise<SearchParams>;
+}) {
+
+    const params = await searchParams;
+    const query = params?.query || '';
+
+    const customersData = await fetchFilteredCustomers(query);
 
     return (
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1>Dashboard</h1>
-
-            <p>Customers Page</p>
-        </div>
+        <main className="flex flex-col items-center justify-center pb-24">
+            <Table customers={customersData} />
+        </main>
     );
 }

@@ -1,21 +1,33 @@
+// app/dashboard/page.tsx
 
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { lusitana } from '@/components/ui/fonts';
+import { fetchLatestInvoices } from '@/lib/data';
+import { Suspense } from 'react';
+import { RevenueChartSkeleton, CardsSkeleton } from '@/components/ui/skeletons';
+import CardWrapper from '@/components/ui/dashboard/cards';
+import LatestInvoices from '@/components/ui/dashboard/latest-invoices';
+import RevenueChart from '@/components/ui/dashboard/revenue-chart';
 
-export default async function DashboardPage() {
-    const session = await auth();
-
-    if (!session?.user) {
-        return redirect("/api/auth/signin");
-    }
-    const user = session?.user;
-    console.log("user:", user)
+export default async function Page() {
+    const latestInvoices = await fetchLatestInvoices();
 
     return (
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <h1>Dashboard</h1>
-
-            <p>put your dashboardy stuff here</p>
-        </div>
+        <main className="flex flex-col items-center justify-center pb-24 md:pb-2">
+            <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+                Dashboard
+            </h1>
+            <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
+                <Suspense fallback={<CardsSkeleton />}>
+                    <CardWrapper />
+                </Suspense>
+            </div>
+            {/* Stack RevenueChart above LatestInvoices */}
+            <div className="w-full mt-6 flex flex-col gap-6">
+                <Suspense fallback={<RevenueChartSkeleton />}>
+                    <RevenueChart />
+                </Suspense>
+                <LatestInvoices latestInvoices={latestInvoices} />
+            </div>
+        </main>
     );
 }
