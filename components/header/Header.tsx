@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { Lightbulb, Loader2Icon } from "lucide-react";
+import { Lightbulb, Loader2Icon, PowerIcon } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
-import { auth } from "@/auth";
+import { auth, signOut } from "@/auth";
 
 
 export const Header = async () => {
@@ -36,10 +36,20 @@ export const Header = async () => {
               </div>
             }
           >
-            {!user && (
+            {!user ? (
               <button className="flex items-center gap-2">
                 <Link href="/api/auth/signin">Sign In</Link>
               </button>
+            ) : (
+              <form action={async () => {
+                "use server"
+                await signOut()
+              }}>
+                <button className="flex w-full items-center justify-center gap-2 rounded-md p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+                  <PowerIcon className="w-6" />
+                  <div className="hidden md:block">Sign Out</div>
+                </button>
+              </form>
             )}
           </Suspense>
         </div>

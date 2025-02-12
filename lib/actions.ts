@@ -77,19 +77,29 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    await signIn("credentials", formData, { redirectTo: "/home" });
+    await signIn("credentials", formData, {
+      redirectTo: "/home",
+    });
   } catch (error) {
     if (error instanceof AuthError) {
+      console.log("Error occurred during authentication: ");
       switch (error) {
         case "CredentialsSignin":
           return "Invalid credentials.";
         case "CallbackRouteError":
-          return `${error}`;
+          return "CallbackRouteError";
+        case "User not found":
+          return "User not found";
+        case "Invalid password":
+          return "Invalid password";
         default:
           return "Something went wrong.";
       }
     }
-    throw error;
+    redirect("/login");
+    // ToDo throw error message to user
+
+    // throw error;
   }
 }
 
