@@ -10,16 +10,15 @@ import {
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@/components/ui/Button';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
+
 import { authenticate } from '@/lib/actions';
 
 import Link from 'next/link';
 
 export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useFormState(
-    authenticate,
-    undefined,
-  );
+  const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined);
+
 
   return (
     <form action={formAction} className="space-y-3">
