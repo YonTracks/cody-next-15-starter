@@ -1,13 +1,23 @@
+// app/(root)/home/page.tsx
 
+import React from "react";
+import { auth } from "@/auth";
 
-export default function Home() {
+async function HomePage() {
+    const session = await auth();
+    // console.log("Session:", session)
     return (
-        <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-                <div className="text-center">
-                    Home Page
+        <main className="flex flex-col items-center justify-between p-24">
+            <h2>Hello</h2>
+            {session?.user?.name || "No User"}
+
+            <section>
+                <div>
+
                 </div>
-            </main>
-        </div>
+            </section>
+        </main>
     );
 }
+
+export default HomePage;

@@ -36,7 +36,7 @@ import {
   LoginError,
   NotFoundError,
 } from "./errors";
-import { db } from "@/db";
+
 import { createTransaction } from "@/data-access/utils";
 
 export async function deleteUserUseCase(

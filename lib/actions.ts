@@ -101,7 +101,10 @@ export async function resetPassword(
       confirmPassword: formData.get("confirmPassword"),
     });
 
-    const { email, newPassword } = validated.data;
+    const { email, newPassword } = validated.data as {
+      email: string;
+      newPassword: string;
+    };
     // Check that the user exists
     const { rows } = await sql`SELECT * FROM users WHERE email = ${email}`;
     if (!rows.length) {
