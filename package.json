@@ -10,8 +10,12 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@lucia-auth/adapter-drizzle": "^1.1.0",
     "@simplewebauthn/typescript-types": "^8.3.4",
+    "@t3-oss/env-nextjs": "^0.12.0",
+    "arctic": "^3.2.4",
     "bcrypt": "^5.1.1",
+    "lucia": "^3.2.2",
     "lucide-react": "^0.475.0",
     "next": "15.1.6",
     "next-auth": "^5.0.0-beta.25",
@@ -20,7 +24,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-toastify": "^11.0.3",
-    "zod": "^3.24.1"
+    "tailwind-merge": "^3.0.1",
+    "zod": "^3.24.1",
+    "zsa": "^0.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
