@@ -1,5 +1,5 @@
 'use client';
-import { useFormState } from 'react-dom'; // Ensure this import is correct; it might be `react` or a specific hook library
+import { useActionState } from 'react'; // Ensure this import is correct; it might be `react` or a specific hook library
 import { CustomerField, InvoiceForm } from '@/lib/definitions';
 import {
   CheckIcon,
@@ -20,7 +20,7 @@ export default function EditInvoiceForm({
 }) {
   const initialState: State = { message: null, errors: {} };
   const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-  const [state, formAction] = useFormState(updateInvoiceWithId, initialState);
+  const [state, formAction] = useActionState(updateInvoiceWithId, initialState);
 
   return (
     <form action={formAction}>

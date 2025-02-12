@@ -1,7 +1,7 @@
 'use client';
 
 import { createInvoice, State } from '@/lib/actions';
-import { useFormState } from 'react-dom'; // Ensure this import is correct; it might be `react` or a specific hook library
+import { useActionState } from 'react'; // Ensure this import is correct; it might be `react` or a specific hook library
 import { CustomerField } from '@/lib/definitions';
 import Link from 'next/link';
 import {
@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState: State = { message: null, errors: {} };
-  const [state, formAction] = useFormState(createInvoice, initialState);
+  const [state, formAction] = useActionState(createInvoice, initialState);
 
   return (
     <form action={formAction}>
