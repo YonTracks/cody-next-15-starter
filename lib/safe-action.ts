@@ -3,6 +3,7 @@ import { assertAuthenticated } from "@/lib/session";
 import { createServerActionProcedure } from "zsa";
 import { PublicError } from "../use-cases/errors";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function shapeErrors({ err }: any) {
   const isAllowedError = err instanceof PublicError;
   // let's all errors pass through to the UI so debugging locally is easier

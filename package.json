@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@libsql/client": "^0.14.0",
     "@lucia-auth/adapter-drizzle": "^1.1.0",
+    "@react-email/components": "^0.0.33",
     "@simplewebauthn/typescript-types": "^8.3.4",
     "@t3-oss/env-nextjs": "^0.12.0",
     "arctic": "^3.2.4",
